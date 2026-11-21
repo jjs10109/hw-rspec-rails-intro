@@ -69,9 +69,7 @@ class MoviesController < ApplicationController
       if @movies.empty?
         flash.now[:warning] = 'No movies found with given parameters!'
       end
-    elsif params[:search_terms].present?
-      @movies = Movie.find_in_tmdb(params[:search_terms])
-    elsif request.get? && params.any?
+    elsif params.key?(:title)
       flash.now[:danger] = 'Please fill in all required fields!'
     end
   end
